@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CT-200 | Document QA Studio</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">T9</div><div><strong>Tri9T AI</strong><small>DOCUMENT QA STUDIO</small></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <button class="nav active" data-view="overview"><span>▦</span> Overview</button>
+    <button class="nav" data-view="document"><span>▤</span> Document explorer</button>
+    <button class="nav" data-view="selections"><span>☷</span> Selections & QA</button>
+    <div class="sidebar-bottom"><div class="status-dot"></div><div><b>API connection</b><small id="connection-label">Checking backend…</small></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><div class="eyebrow">ENGINEERING WORKSPACE / CT-200</div><h1 id="page-title">Document QA overview</h1></div><div class="top-actions"><span class="pill"><i></i> Local environment</span><button class="btn btn-secondary" id="upload-trigger">Upload PDF</button><input id="pdf-upload" type="file" accept=".pdf,application/pdf" hidden><button class="btn btn-primary" id="ingest-latest">Ingest v2 manual ↗</button></div></header>
+    <section class="page active" id="view-overview">
+      <div class="hero"><div><div class="eyebrow light">TRACEABLE DOCUMENT INTELLIGENCE</div><h2>From technical manual<br>to testable requirements.</h2><p>Explore versioned source content, select requirements, and generate traceable QA test ideas.</p><div class="hero-actions"><button class="btn btn-white" data-goto="document">Explore document <b>→</b></button><button class="btn btn-ghost" id="ingest-both">Run v1 → v2 demo</button></div></div><div class="hero-art"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="doc-illustration"><div class="doc-top"></div><div class="doc-line wide"></div><div class="doc-line"></div><div class="doc-line mid"></div><div class="doc-divider"></div><div class="doc-line wide"></div><div class="doc-line mid"></div><div class="doc-tag">CT-200 / PDF</div></div><div class="floating-check">✓ <span>Traceable</span></div></div></div>
+      <div class="stat-grid"><div class="stat-card"><span class="stat-label">CURRENT VERSION</span><strong id="stat-version">—</strong><small id="stat-version-note">No document ingested yet</small></div><div class="stat-card"><span class="stat-label">STRUCTURED NODES</span><strong id="stat-nodes">—</strong><small>Sections and subsections</small></div><div class="stat-card"><span class="stat-label">SAVED SELECTIONS</span><strong id="stat-selections">—</strong><small>Version-pinned snapshots</small></div><div class="stat-card"><span class="stat-label">GENERATED CASES</span><strong id="stat-cases">—</strong><small>Traceable QA ideas</small></div></div>
+      <div class="section-heading"><div><h3>Quick actions</h3><p>Pick up where you left off.</p></div></div>
+      <div class="quick-grid"><button class="quick-card" data-goto="document"><span class="quick-icon purple">▤</span><b>Browse document tree</b><small>Search and inspect source sections</small><span class="quick-arrow">↗</span></button><button class="quick-card" data-goto="selections"><span class="quick-icon orange">✳</span><b>Generate QA test ideas</b><small>Pin sections and create test cases</small><span class="quick-arrow">↗</span></button><button class="quick-card" id="quick-compare"><span class="quick-icon green">⇄</span><b>Compare versions</b><small>Ingest v2 and detect changes</small><span class="quick-arrow">↗</span></button></div>
+      <div class="notice"><span>ⓘ</span><div><b>Safety-first traceability</b><p>Generated ideas are engineering aids, not validated medical-device test protocols. Review every case against the source manual.</p></div></div>
+    </section>
+    <section class="page" id="view-document">
+      <div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="search-input" placeholder="Search headings or document text…"><button id="search-btn">Search</button></div><div class="version-picker"><label for="version-select">VERSION</label><select id="version-select"><option value="">Latest</option></select></div></div>
+      <div class="explorer-layout"><div class="panel tree-panel"><div class="panel-head"><div><h3>Document structure</h3><p id="tree-caption">CT-200 technical & user manual</p></div><button class="icon-btn" id="refresh-tree" title="Refresh">↻</button></div><div id="tree" class="tree"><div class="empty">Ingest a manual to load the document tree.</div></div></div><div class="panel detail-panel"><div class="panel-head"><div><div class="eyebrow">SOURCE CONTENT</div><h3 id="detail-heading">Select a section</h3></div><span class="hash-pill" id="detail-level">Awaiting selection</span></div><div id="detail-content" class="detail-content"><div class="empty large">Choose a section in the document tree to inspect its content, hash, and children.</div></div><div class="detail-footer"><label class="check-row"><input type="checkbox" id="select-node" disabled> Include this section in QA selection</label><button class="btn btn-primary" id="create-selection" disabled>Create selection →</button></div></div></div>
+      <div class="panel compare-panel" style="margin-top:16px"><div class="panel-head"><div><h3>Version comparison</h3><p>Review changed, added, and removed sections between document versions.</p></div><div class="inline-actions"><select id="compare-from" class="field"><option value="1">From v1</option></select><select id="compare-to" class="field"><option value="">Latest</option></select><button class="btn btn-secondary" id="compare-btn">Compare versions</button></div></div><div id="compare-summary" class="compare-summary"></div><div id="compare-results" class="compare-results"><div class="empty">Ingest two versions, then compare them here.</div></div></div>
+      <div class="panel search-results-panel hidden" id="search-results-panel"><div class="panel-head"><div><h3>Search results</h3><p id="search-caption"></p></div><button class="icon-btn" id="close-search">×</button></div><div id="search-results"></div></div>
+    </section>
+    <section class="page" id="view-selections">
+      <div class="section-heading"><div><h3>Selections & QA generation</h3><p>Selections preserve the exact text and version used to create test ideas.</p></div></div>
+      <div class="selection-layout"><div class="panel"><div class="panel-head"><div><h3>Create a selection</h3><p>Choose one or more nodes from a single version.</p></div></div><div class="form-body"><label>Selection name</label><input id="selection-name" class="field" placeholder="e.g. Battery safety QA"><label>Node IDs <small>(comma-separated)</small></label><input id="selection-ids" class="field" placeholder="e.g. 5, 7"><small class="helper">Tip: select a section in Document Explorer and click “Create selection” to prefill this form.</small><button class="btn btn-primary full" id="save-selection">Save version-pinned selection</button></div></div><div class="panel"><div class="panel-head"><div><h3>Saved selections</h3><p>Choose a selection to generate or retrieve QA cases.</p></div><button class="icon-btn" id="refresh-selections">↻</button></div><div id="selection-list" class="list-body"><div class="empty">No selections loaded yet.</div></div></div></div>
+      <div class="panel qa-panel"><div class="panel-head"><div><h3>QA test cases</h3><p id="qa-subtitle">Select a saved selection to generate test ideas.</p></div><div class="inline-actions"><button class="btn btn-secondary" id="check-staleness" disabled>Check staleness</button><button class="btn btn-primary" id="generate-cases" disabled>Generate test cases ✳</button></div></div><div id="staleness-banner" class="staleness-banner hidden"></div><div id="qa-results" class="qa-results"><div class="empty large">Generated test cases and source traceability will appear here.</div></div></div>
+    </section>
+    <footer>Tri9T AI · CT-200 Document QA Studio <span>Built for traceability · Verify before use</span></footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="/static/app.js"></script>
+</body></html>
